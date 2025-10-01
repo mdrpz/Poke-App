@@ -4,7 +4,7 @@ interface Move {
   name: string;
   power: number | string;
   type: string;
-  calculatedPower?: number; // The calculated power is now passed in
+  calculatedPower?: number;
 }
 
 interface MoveSelectorProps {
@@ -35,14 +35,13 @@ const typeColors: { [key: string]: string } = {
 };
 
 const getTypeColorClass = (type: string): string => {
-  return typeColors[type.toLowerCase()] || "bg-gray-400"; // Default to Normal type color if type is not found
+  return typeColors[type.toLowerCase()] || "bg-gray-400";
 };
 
 const MoveSelector: React.FC<MoveSelectorProps> = ({
   availableMoves = [],
   onMoveSelect,
 }) => {
-  // Filter out non-attacking moves (i.e., moves with power <= 0 or "N/A")
   const attackingMoves = availableMoves.filter(
     (move) => typeof move.power === "number" && move.power > 0
   );

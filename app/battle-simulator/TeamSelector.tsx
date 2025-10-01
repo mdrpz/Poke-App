@@ -149,7 +149,6 @@ const TeamSelector: React.FC<{ isPlayer: boolean; onSaveTeam: () => void }> = ({
       })
     );
 
-    // Filter to only include attacking moves
     const attackingMoves = allMoves.filter(
       (move) => typeof move.power === "number" && move.power > 0
     );

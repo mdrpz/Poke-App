@@ -13,7 +13,7 @@
     format("woff2");
 }
 
-:root {
+::root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -47,14 +47,13 @@ body {
   transform: scale(1.05);
 }
 
-/* Hide scrollbars but allow scrolling */
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+  display: none;
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @keyframes pokeballJump {

@@ -14,7 +14,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="./public/images/pokeball.png" />
       <body>
         <PokemonTeamProvider>{children}</PokemonTeamProvider>
       </body>

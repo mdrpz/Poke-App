@@ -15,7 +15,6 @@ const PokemonSearch: React.FC<PokemonSearchProps> = ({ onPokemonSelect }) => {
   const [allPokemon, setAllPokemon] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch all Pokémon names on component mount
   useEffect(() => {
     const fetchAllPokemon = async () => {
       const response = await fetch(
@@ -31,22 +30,19 @@ const PokemonSearch: React.FC<PokemonSearchProps> = ({ onPokemonSelect }) => {
     fetchAllPokemon();
   }, []);
 
-  // Utility function to capitalize the first letter of a string
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1);
 
   const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
-    setError(null); // Clear previous error message
+    setError(null);
 
     if (isNaN(Number(value)) && value.length >= 3) {
-      // If the value is not a number and at least 3 characters, show name suggestions
       const filteredPokemon = allPokemon.filter((name) =>
         name.toLowerCase().startsWith(value.toLowerCase())
       );
 
-      // Fetch sprites for the filtered Pokémon names
       const pokemonSuggestions = await Promise.all(
         filteredPokemon.map(async (name) => {
           const response = await fetch(

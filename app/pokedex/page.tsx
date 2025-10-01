@@ -229,7 +229,6 @@ const Pokedex: React.FC = () => {
       <div className="w-full flex flex-col items-center justify-start min-h-screen py-12">
         <h1 className="text-white text-2xl font-bold mb-4 mt-20">Pokédex</h1>
         <SearchBar onSearch={fetchPokemonData} />
-        {/* Use SearchBar component */}
         {error && <p className="text-red-500 mb-4 text-xs">{error}</p>}
         {pokemon && (
           <div className="bg-white shadow-md rounded-lg p-6 text-center w-full max-w-lg relative mb-8 overflow-hidden">
@@ -289,7 +288,6 @@ const Pokedex: React.FC = () => {
               ))}
             </div>
 
-            {/* Entry Section */}
             <p className="text-black mb-4 text-xs italic">
               {pokemon.flavor_text}
             </p>
@@ -324,21 +322,19 @@ const Pokedex: React.FC = () => {
                 .join(", ")}
             </p>
 
-            {/* Weaknesses Section */}
             <h3 className="text-black text-sm font-bold mb-2">Weaknesses</h3>
             <div className="flex flex-wrap justify-center mb-4">
               {weaknesses.map((weakness, index) => (
                 <span
                   key={index}
                   className={`px-2 py-1 rounded ${typeColors[weakness]} text-white text-xs`}
-                  style={{ margin: "0.25rem" }} // Adds spacing around each item
+                  style={{ margin: "0.25rem" }}
                 >
                   {weakness.charAt(0).toUpperCase() + weakness.slice(1)}
                 </span>
               ))}
             </div>
 
-            {/* Stats Section */}
             <h3 className="text-black text-sm font-bold mb-2">Stats</h3>
             <div className="flex justify-center space-x-4 mb-4">
               {pokemon.stats.map((stat, index) => (
@@ -363,7 +359,6 @@ const Pokedex: React.FC = () => {
               ))}
             </div>
 
-            {/* Display Evolutions */}
             {evolutionChain.length > 1 && (
               <>
                 <h3 className="text-black text-sm font-bold mb-2">
@@ -398,7 +393,6 @@ const Pokedex: React.FC = () => {
               </>
             )}
 
-            {/* Navigation Buttons */}
             <div className="flex justify-between mt-6">
               {prevPokemon && (
                 <button

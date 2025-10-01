@@ -20,19 +20,16 @@ export default function BattleSimulator() {
   }, []);
 
   const validateAndSavePlayerTeam = () => {
-    // Ensure a difficulty is selected
     if (!difficulty) {
       alert("You must select a difficulty level.");
       return false;
     }
 
-    // Ensure at least one Pokémon is selected
     if (playerTeam.length === 0) {
       alert("You must select at least one Pokémon.");
       return false;
     }
 
-    // Ensure all Pokémon have at least one move selected
     const allHaveMoves = playerTeam.every(
       (pokemon) => pokemon.selectedMoves.length > 0
     );
@@ -42,7 +39,6 @@ export default function BattleSimulator() {
       return false;
     }
 
-    // Save the player's team if validation passes
     setPlayerTeam([...playerTeam]);
     return true;
   };
@@ -51,7 +47,7 @@ export default function BattleSimulator() {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     if (!validateAndSavePlayerTeam()) {
-      event.preventDefault(); // Prevent navigation if validation fails
+      event.preventDefault();
     }
   };
 

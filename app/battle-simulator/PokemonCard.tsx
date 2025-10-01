@@ -12,13 +12,13 @@ interface Pokemon {
   sprites: {
     front_default: string;
   };
-  types: { type: { name: string } }[]; // Assuming `types` is an array containing the Pokémon's types
+  types: { type: { name: string } }[];
 }
 
 interface PokemonCardProps {
   pokemon: Pokemon;
   onSelect: () => void;
-  onRemove: () => void; // Add a prop for handling removal
+  onRemove: () => void;
 }
 
 const typeColors: { [key: string]: string } = {
@@ -65,7 +65,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
     >
       <button
         onClick={(e) => {
-          e.stopPropagation(); // Prevents the onSelect from being triggered when removing
+          e.stopPropagation();
           onRemove();
         }}
         className="absolute top-1 right-1 text-gray-500 rounded-md p-1 text-md hover:text-white hover:bg-red-500 transition-colors duration-200"

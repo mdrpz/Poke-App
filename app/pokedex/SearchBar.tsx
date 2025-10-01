@@ -38,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             .filter((pokemon: PokemonSuggestion) =>
               pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
             );
-          setSuggestions(filteredSuggestions.slice(0, 5)); // Limit to 5 suggestions
+          setSuggestions(filteredSuggestions.slice(0, 5));
         } catch (error) {
           console.error("Error fetching suggestions:", error);
         }
@@ -49,7 +49,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     const debounceTimer = setTimeout(() => {
       fetchSuggestions();
-    }, 300); // Debouncing to avoid too many API calls
+    }, 300);
 
     return () => clearTimeout(debounceTimer);
   }, [searchTerm]);

@@ -24,16 +24,15 @@ function Pokeball() {
     }
   });
 
-  // Assign vertex colors to the geometry
   const geometry = new THREE.SphereGeometry(1, 64, 64);
-  const colors = [];
+  const colors = [] as number[];
 
   for (let i = 0; i < geometry.attributes.position.count; i++) {
     const y = geometry.attributes.position.getY(i);
     if (y > 0) {
-      colors.push(2, 0, 0); // Red for the top half
+      colors.push(2, 0, 0);
     } else {
-      colors.push(2, 2, 2); // White for the bottom half
+      colors.push(2, 2, 2);
     }
   }
 
@@ -41,12 +40,11 @@ function Pokeball() {
 
   return (
     <group ref={group} scale={2}>
-      {/* Sphere with Red and White Halves */}
       <mesh geometry={geometry}>
         <meshStandardMaterial
           vertexColors={true}
-          roughness={0.2} // Shine
-          metalness={0.3} // Reflective
+          roughness={0.2}
+          metalness={0.3}
         />
       </mesh>
 

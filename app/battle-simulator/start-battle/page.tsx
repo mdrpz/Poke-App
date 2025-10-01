@@ -1,5 +1,3 @@
-// /battle-simulator/start-battle/page.tsx
-
 "use client";
 
 export const dynamic = "force-dynamic";
@@ -85,7 +83,6 @@ export default function StartBattlePage() {
 
   const handleSwitchPokemon = (pokemon: Pokemon) => {
     if (pokemon !== playerPokemon && playerPokemon) {
-      // Save the current HP of the Pokémon being switched out
       setCurrentPlayerTeam((prevTeam) =>
         prevTeam.map((p) =>
           p === playerPokemon
@@ -94,7 +91,6 @@ export default function StartBattlePage() {
         )
       );
 
-      // Switch to the new Pokémon and set its HP
       setPlayerPokemon(pokemon);
       setPlayerHP(pokemon.stats.hp);
 
@@ -199,7 +195,6 @@ export default function StartBattlePage() {
       );
       return opponentPokemon.selectedMoves[randomIndex];
     }
-    // Default move if no moves are available
     return {
       name: "Struggle",
       power: 50,
@@ -246,8 +241,7 @@ export default function StartBattlePage() {
     );
   }
 
-  // Add this function before your return statement
-  const getHPBarColor = (hp, maxHp) => {
+  const getHPBarColor = (hp: number, maxHp: number) => {
     const hpPercentage = (hp / maxHp) * 100;
     if (hpPercentage > 50) return "bg-green-500";
     if (hpPercentage > 20) return "bg-yellow-500";
@@ -275,10 +269,8 @@ export default function StartBattlePage() {
             </div>
           </div>
 
-          {/* Updated Battle Area */}
           <div className="bg-gray-800 bg-opacity-50 p-8 rounded-lg shadow-lg w-full md:w-3/4">
             <div className="flex justify-between items-start mb-8 flex-col md:flex-row">
-              {/* Player's Pokémon */}
               <div className="text-center w-full md:w-1/2 mb-4 md:mb-0">
                 <h3 className="text-green-500 text-lg font-semibold mb-2">
                   You
@@ -315,7 +307,6 @@ export default function StartBattlePage() {
                 )}
               </div>
 
-              {/* Opponent's Pokémon */}
               <div className="text-center w-full md:w-1/2 mb-4 md:mb-0">
                 <h3 className="text-red-500 text-lg font-semibold mb-2">
                   Opponent

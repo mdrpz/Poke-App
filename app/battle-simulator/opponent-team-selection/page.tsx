@@ -2,34 +2,31 @@
 
 import React, { useState, useEffect } from "react";
 import TeamSelector from "../TeamSelector";
-import Link from "next/link"; // Import Link for navigation
+import Link from "next/link";
 import { usePokemonTeam } from "../PokemonTeamContext";
 import Navbar from "@/app/Navbar";
-import Background from "@/app/public/images/battle.png"; // Import the background image
+import Background from "@/app/public/images/battle.png";
 
 export default function BattleSimulator() {
   const [loading, setLoading] = useState(true);
   const { setOpponentTeam, opponentTeam } = usePokemonTeam();
 
   useEffect(() => {
-    // Simulate data fetching
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
 
   const saveOpponentTeam = () => {
-    setOpponentTeam([...opponentTeam]); // Save the opponent's team
+    setOpponentTeam([...opponentTeam]);
   };
 
   const validateAndSaveOpponentTeam = (): boolean => {
-    // Ensure at least one Pokémon is selected
     if (opponentTeam.length === 0) {
       alert("You must select at least one Pokémon.");
       return false;
     }
 
-    // Ensure all Pokémon have at least one move selected
     const allHaveMoves = opponentTeam.every(
       (pokemon) => pokemon.selectedMoves.length > 0
     );
@@ -39,7 +36,6 @@ export default function BattleSimulator() {
       return false;
     }
 
-    // Save the opponent's team if validation passes
     saveOpponentTeam();
     return true;
   };
@@ -57,7 +53,7 @@ export default function BattleSimulator() {
         minHeight: "100vh",
       }}
     >
-      <Navbar />{" "}
+      <Navbar />
       <div className="max-w-4xl mx-auto py-12">
         <h1 className="text-2xl font-bold text-center text-red-500 mb-6 mt-20">
           Opponent Team
