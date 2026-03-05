@@ -132,22 +132,33 @@ const TeamSelector: React.FC<{ isPlayer: boolean; onSaveTeam: () => void }> = ({
       return;
     }
 
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
-    );
-    const data = await response.json();
+    let data;
+    try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
+      );
+      if (!response.ok) throw new Error("Pokémon not found");
+      data = await response.json();
+    } catch {
+      alert("Invalid Pokémon name or ID. Please try again.");
+      return;
+    }
 
     const allMoves = await Promise.all(
       data.moves.map(async (moveEntry: { move: { url: string } }) => {
-        const moveResponse = await fetch(moveEntry.move.url);
-        const moveData = await moveResponse.json();
-        return {
-          name: capitalize(moveData.name),
-          power: moveData.power || "N/A",
-          type: capitalize(moveData.type.name) || "Unknown",
-        };
+        try {
+          const moveResponse = await fetch(moveEntry.move.url);
+          const moveData = await moveResponse.json();
+          return {
+            name: capitalize(moveData.name),
+            power: moveData.power || "N/A",
+            type: capitalize(moveData.type.name) || "Unknown",
+          };
+        } catch {
+          return null;
+        }
       })
-    );
+    ).then((moves) => moves.filter(Boolean) as Move[]);
 
     const attackingMoves = allMoves.filter(
       (move) => typeof move.power === "number" && move.power > 0

@@ -52,8 +52,8 @@ function Navbar() {
             <Image
               src={pokeballIcon}
               alt="Pokéball"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
             />
           </div>
           <span className="z-10 text-red-600">

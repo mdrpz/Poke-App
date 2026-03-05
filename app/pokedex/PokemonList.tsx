@@ -69,9 +69,7 @@ const PokemonList: React.FC<{ onSelect: (name: string) => void }> = ({
   }, [offset, limit]);
 
   const loadMore = () => {
-    const newOffset = offset + limit;
-    setOffset(newOffset);
-    fetchPokemonList(newOffset, limit);
+    setOffset((prev) => prev + limit);
   };
 
   const handleCardClick = (name: string) => {

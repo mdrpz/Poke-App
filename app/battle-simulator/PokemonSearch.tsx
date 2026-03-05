@@ -45,14 +45,19 @@ const PokemonSearch: React.FC<PokemonSearchProps> = ({ onPokemonSelect }) => {
 
       const pokemonSuggestions = await Promise.all(
         filteredPokemon.map(async (name) => {
-          const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
-          );
-          const data = await response.json();
-          return {
-            name,
-            sprite: data.sprites.front_default || null,
-          };
+          try {
+            const response = await fetch(
+              `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+            );
+            if (!response.ok) return { name, sprite: null };
+            const data = await response.json();
+            return {
+              name,
+              sprite: data.sprites.front_default || null,
+            };
+          } catch {
+            return { name, sprite: null };
+          }
         })
       );
 
