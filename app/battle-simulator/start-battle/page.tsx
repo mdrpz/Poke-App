@@ -9,7 +9,7 @@ import Navbar from "@/app/Navbar";
 import Background from "@/app/public/images/battle.png";
 
 export default function StartBattlePage() {
-  const { playerTeam, opponentTeam } = usePokemonTeam();
+  const { playerTeam, opponentTeam, difficulty } = usePokemonTeam();
 
   const [currentPlayerTeam, setCurrentPlayerTeam] = useState<Pokemon[]>([]);
   const [currentOpponentTeam, setCurrentOpponentTeam] = useState<Pokemon[]>([]);
@@ -190,10 +190,29 @@ export default function StartBattlePage() {
       opponentPokemon.selectedMoves &&
       opponentPokemon.selectedMoves.length > 0
     ) {
-      const randomIndex = Math.floor(
-        Math.random() * opponentPokemon.selectedMoves.length
-      );
-      return opponentPokemon.selectedMoves[randomIndex];
+      const moves = opponentPokemon.selectedMoves;
+
+      if (difficulty === "Easy") {
+        const randomIndex = Math.floor(Math.random() * moves.length);
+        return moves[randomIndex];
+      } else if (difficulty === "Medium") {
+        return moves.reduce((best, move) => {
+          const power = typeof move.power === "number" ? move.power : 0;
+          const bestPower = typeof best.power === "number" ? best.power : 0;
+          return power > bestPower ? move : best;
+        });
+      } else {
+        // Hard: pick move that deals most damage to the current player pokemon
+        return moves.reduce((best, move) => {
+          const dmg = playerPokemon
+            ? calculateDamage(move, opponentPokemon, playerPokemon)
+            : 0;
+          const bestDmg = playerPokemon
+            ? calculateDamage(best, opponentPokemon, playerPokemon)
+            : 0;
+          return dmg > bestDmg ? move : best;
+        });
+      }
     }
     return {
       name: "Struggle",

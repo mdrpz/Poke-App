@@ -35,7 +35,7 @@ interface Pokemon {
   types: { type: { name: string } }[];
 }
 
-const TeamSelector: React.FC<{ isPlayer: boolean; onSaveTeam: () => void }> = ({
+const TeamSelector: React.FC<{ isPlayer: boolean }> = ({
   isPlayer,
 }) => {
   const {

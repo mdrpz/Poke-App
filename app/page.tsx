@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import Navbar from "./Navbar";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -24,19 +24,20 @@ function Pokeball() {
     }
   });
 
-  const geometry = new THREE.SphereGeometry(1, 64, 64);
-  const colors = [] as number[];
-
-  for (let i = 0; i < geometry.attributes.position.count; i++) {
-    const y = geometry.attributes.position.getY(i);
-    if (y > 0) {
-      colors.push(2, 0, 0);
-    } else {
-      colors.push(2, 2, 2);
+  const geometry = useMemo(() => {
+    const geo = new THREE.SphereGeometry(1, 64, 64);
+    const colors = [] as number[];
+    for (let i = 0; i < geo.attributes.position.count; i++) {
+      const y = geo.attributes.position.getY(i);
+      if (y > 0) {
+        colors.push(2, 0, 0);
+      } else {
+        colors.push(2, 2, 2);
+      }
     }
-  }
-
-  geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+    geo.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+    return geo;
+  }, []);
 
   return (
     <group ref={group} scale={2}>

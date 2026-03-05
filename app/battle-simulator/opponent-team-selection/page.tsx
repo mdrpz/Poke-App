@@ -58,7 +58,7 @@ export default function BattleSimulator() {
         <h1 className="text-2xl font-bold text-center text-red-500 mb-6 mt-20">
           Opponent Team
         </h1>
-        <TeamSelector isPlayer={false} onSaveTeam={saveOpponentTeam} />
+        <TeamSelector isPlayer={false} />
 
         <div className="flex justify-center space-x-4 mt-6">
           <Link

@@ -73,7 +73,7 @@ export default function BattleSimulator() {
           selectedDifficulty={difficulty}
           onSelectDifficulty={setDifficulty}
         />
-        <TeamSelector isPlayer={true} onSaveTeam={validateAndSavePlayerTeam} />
+        <TeamSelector isPlayer={true} />
 
         <div className="text-center mt-6">
           <Link
